@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OnlineStep.Views.CourseView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:onlineStep="clr-namespace:OnlineStep;assembly=OnlineStep"
+    xmlns:viewModels="clr-namespace:OnlineStep.ViewModels;assembly=OnlineStep"
+    BackgroundImageSource="Background.png"
+    mc:Ignorable="d">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/Global.xaml" />
+        <ResourceDictionary Source="/Styles/Text.xaml" />
+    </ContentPage.Resources>
+
+    <ListView
+        BackgroundColor="Transparent"
+        HasUnevenRows="True"
+        ItemsSource="{Binding Courses}"
+        SelectionMode="None"
+        SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+
+                    <Frame
+                        Margin="12,12,12,0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        CornerRadius="8"
+                        HorizontalOptions="FillAndExpand"
+                        IsClippedToBounds="True">
+                        <Grid>
+                            <ImageButton
+                                Grid.Row="0"
+                                Aspect="AspectFill"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CourseViewModel}}, Path=GoToChapters}"
+                                CommandParameter="{Binding _id}"
+                                HorizontalOptions="Center"
+                                Source="{Binding Img}"
+                                VerticalOptions="CenterAndExpand" />
+                            <Label
+                                Grid.Column="0"
+                                Margin="12,8,0,0"
+                                Style="{StaticResource TextSubhead}"
+                                Text="{Binding Name}" />
+                        </Grid>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
+
+
+

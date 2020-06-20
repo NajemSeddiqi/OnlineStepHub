@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OnlineStep.Views.McqView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:behaviours="clr-namespace:OnlineStep.Assets"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:OnlineStep.ViewModels;assembly=OnlineStep"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/Global.xaml" />
+        <ResourceDictionary Source="/Styles/Text.xaml" />
+        <ResourceDictionary>
+            <behaviours:BoolConverter x:Key="BoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+
+        <StackLayout Orientation="Vertical" VerticalOptions="Start">
+            <Frame
+                Margin="16,16,16,0"
+                Padding="0"
+                CornerRadius="8"
+                IsClippedToBounds="True">
+                <ProgressBar Progress="{Binding Progress}" Style="{StaticResource ProgressBar}" />
+            </Frame>
+
+            <Label
+                Margin="20,4,16,0"
+                FontAttributes="Bold"
+                FontSize="28"
+                HorizontalOptions="Center"
+                Opacity="0.85"
+                Text="Vilket svar är rätt?"
+                TextColor="#333333"
+                VerticalOptions="Start" />
+
+            <Image
+                Margin="4"
+                HeightRequest="176"
+                HorizontalOptions="Center"
+                Source="currency.png" />
+
+
+
+            <!--<Label
+                Margin="8"
+                FontSize="22"
+                Text="{Binding Question}"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />-->
+
+
+            <!--  Hardcodded text for the presentation to get it centered  -->
+
+            <Label
+                Margin="0,0,0,0"
+                FontSize="22"
+                HorizontalOptions="Center"
+                Text="You need to exchange money if you go "
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+
+            <Label
+                Margin="0,-4,0,0"
+                FontSize="22"
+                HorizontalOptions="Center"
+                Text="to a country that uses a different..."
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+
+
+        </StackLayout>
+
+
+
+
+        <ListView
+            Margin="8,0,8,0"
+            BackgroundColor="Transparent"
+            HasUnevenRows="True"
+            ItemsSource="{Binding Answers}"
+            SelectionMode="None"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame
+                            Margin="0"
+                            Padding="0"
+                            CornerRadius="8"
+                            IsClippedToBounds="True">
+                            <Button
+                                Margin="8,12,8,0"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:McqViewModel}}, Path=SelectAnswer}"
+                                CommandParameter="{Binding Value}"
+                                CornerRadius="8"
+                                Style="{StaticResource McqButton}"
+                                Text="{Binding Value}">
+                                <Button.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Selected}"
+                                        TargetType="Button"
+                                        Value="true">
+                                        <Setter Property="Style" Value="{StaticResource McqButtonSelected}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+
+        <ContentView IsVisible="{Binding ShowCorrectMeButton}">
+
+            <Button
+                Margin="16,16,16,8"
+                Command="{Binding CheckCorrectAnswer}"
+                CornerRadius="8"
+                Text="RÄTTA">
+                <Button.Triggers>
+                    <DataTrigger
+                        Binding="{Binding AnythingSelected, Converter={StaticResource BoolConverter}}"
+                        TargetType="Button"
+                        Value="true">
+                        <Setter Property="Style" Value="{StaticResource DisabledButton}" />
+                    </DataTrigger>
+                    <DataTrigger
+                        Binding="{Binding AnythingSelected, Converter={StaticResource BoolConverter}}"
+                        TargetType="Button"
+                        Value="false">
+                        <Setter Property="Style" Value="{StaticResource MainPageButton}" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+        </ContentView>
+
+
+        <ContentView
+            Margin="0"
+            IsVisible="{Binding ShowCorrection}"
+            Opacity="1.0">
+            <ContentView.Triggers>
+                <DataTrigger
+                    Binding="{Binding CorectOrWrongBool}"
+                    TargetType="ContentView"
+                    Value="true">
+                    <Setter Property="Style" Value="{StaticResource Success}" />
+                </DataTrigger>
+                <DataTrigger
+                    Binding="{Binding CorectOrWrongBool}"
+                    TargetType="ContentView"
+                    Value="false">
+                    <Setter Property="Style" Value="{StaticResource Fail}" />
+                </DataTrigger>
+            </ContentView.Triggers>
+            <StackLayout VerticalOptions="End">
+
+                <Label
+                    Margin="16,8,16,0"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="Start"
+                    Text="{Binding CorrectOrWrongMessage}"
+                    VerticalOptions="Start" />
+
+                <Button
+                    Margin="16,16,16,8"
+                    Command="{Binding GoToNextPage}"
+                    CornerRadius="8"
+                    FontAttributes="None"
+                    Text="Fortsätt">
+                    <Button.Triggers>
+                        <DataTrigger
+                            Binding="{Binding CorectOrWrongBool}"
+                            TargetType="Button"
+                            Value="true">
+                            <Setter Property="Style" Value="{StaticResource CorrectAnswer}" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding CorectOrWrongBool}"
+                            TargetType="Button"
+                            Value="false">
+                            <Setter Property="Style" Value="{StaticResource WrongAnswer}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
+        </ContentView>
+    </StackLayout>
+</ContentPage>

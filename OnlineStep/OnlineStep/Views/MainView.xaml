@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OnlineStep.Views.MainView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:onlineStep="clr-namespace:OnlineStep;assembly=OnlineStep"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/Global.xaml" />
+        <ResourceDictionary Source="/Styles/Text.xaml" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <onlineStep:VideoPlayer Source="Background_Planet.mp4" />
+        <StackLayout HorizontalOptions="End" VerticalOptions="Start">
+            <!--<Image
+                Margin="16,16"
+                HeightRequest="104"
+                HorizontalOptions="FillAndExpand"
+                Opacity="0.9"
+                Source="Owl_transparent.png" />-->
+        </StackLayout>
+        <StackLayout
+            Margin="12"
+            Padding="0"
+            Spacing="0"
+            VerticalOptions="End">
+
+            <Label
+                FontAttributes="None"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Opacity="0.55"
+                Style="{DynamicResource TextSubhead}"
+                Text="{Binding WelcomeText}"
+                VerticalOptions="End" />
+
+            <Button
+                Command="{Binding GoToCourses}"
+                Style="{StaticResource MainPageButton}"
+                Text="Kom igång" />
+
+            <Label
+                FontAttributes="None"
+                FontSize="18"
+                HorizontalOptions="CenterAndExpand"
+                Opacity="0.85"
+                Style="{DynamicResource TextSubhead}"
+                Text="Logga in"
+                TextColor="Beige"
+                TextDecorations="Underline"
+                VerticalOptions="End" />
+
+            <!--<Button
+                Margin="8,0,8,12"
+                Style="{StaticResource MainPageButton}"
+                Text="Login" />-->
+
+        </StackLayout>
+    </Grid>
+
+    <!--<StackLayout VerticalOptions="End">-->
+    <!--<Label
+            HorizontalOptions="CenterAndExpand"
+            Style="{StaticResource TextHeadline}"
+            Text="Welcome to Online Step" />
+    -->
+    <!--  The clicked action should be handle by a viewmodel  -->
+    <!--
+        <Button
+            Command="{Binding GoToCourses}"
+            Style="{StaticResource MainPageButton}"
+            Text="Get started" />
+
+    -->
+    <!--  Example of a button changing a viewmodel  -->
+    <!--
+        <Button Style="{StaticResource MainPageButton}" Text="Login" />
+
+
+    -->
+    <!--  Example of a random welcome text  -->
+    <!--
+        <Label
+            HorizontalOptions="CenterAndExpand"
+            Style="{DynamicResource TextSubhead}"
+            Text="{Binding WelcomeText}"
+            VerticalOptions="End" />
+
+    </StackLayout>-->
+</ContentPage>

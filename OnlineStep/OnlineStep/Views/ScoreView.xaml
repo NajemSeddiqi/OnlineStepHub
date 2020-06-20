@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OnlineStep.Views.ScoreView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/Global.xaml" />
+        <ResourceDictionary Source="/Styles/Text.xaml" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+
+
+            <StackLayout Orientation="Vertical">
+
+
+
+                <Frame
+                    Margin="16,16,16,0"
+                    Padding="0"
+                    CornerRadius="8"
+                    IsClippedToBounds="True">
+                    <ProgressBar Progress="{Binding Progress}" Style="{StaticResource Key=ProgressBar}" />
+                </Frame>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical">
+                    <Label
+                        Margin="24,4,24,0"
+                        FontAttributes="Bold"
+                        FontSize="28"
+                        HorizontalOptions="CenterAndExpand"
+                        Opacity="0.85"
+                        Text="Grattis!"
+                        TextColor="#333333" />
+
+                    <Label
+                        Margin="24,-12,24,0"
+                        FontAttributes="None"
+                        FontSize="22"
+                        HorizontalOptions="CenterAndExpand"
+                        Opacity="0.85"
+                        Text="Ny nivå upplåst"
+                        TextColor="#333333" />
+                </StackLayout>
+
+
+
+                <Image
+                    Margin="0,16,0,0"
+                    Aspect="AspectFit"
+                    HeightRequest="280"
+                    IsAnimationPlaying="true"
+                    Source="Animated_Party.gif" />
+
+
+                <StackLayout
+                    Margin="16,8,16,16"
+                    HorizontalOptions="CenterAndExpand"
+                    Orientation="Horizontal">
+
+                    <StackLayout Margin="0" Orientation="Vertical">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="28"
+                            HorizontalOptions="Center"
+                            Opacity="0.85"
+                            Style="{StaticResource TextHeadline}"
+                            Text="XP"
+                            TextColor="#333333" />
+                        <Label
+                            Margin="-4,-8,0,0"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Opacity="0.85"
+                            Style="{StaticResource TextHeadline}"
+                            Text="{Binding ChapterXp}"
+                            TextColor="#333333" />
+                    </StackLayout>
+                    <StackLayout Margin="32" />
+                    <StackLayout Margin="0" Orientation="Vertical">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="28"
+                            HorizontalOptions="Center"
+                            Opacity="0.85"
+                            Style="{StaticResource TextHeadline}"
+                            Text="FRÅGOR"
+                            TextColor="#333333" />
+                        <Label
+                            Margin="-4,-8,0,0"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            Opacity="0.85"
+                            Text="{Binding ChapterResult}"
+                            TextColor="#333333" />
+
+                    </StackLayout>
+                </StackLayout>
+
+
+
+
+                <StackLayout Orientation="Horizontal" />
+
+
+
+                <StackLayout VerticalOptions="EndAndExpand">
+                    <Button
+                        Margin="16,16,16,8"
+                        Command="{Binding GoToChapter}"
+                        Style="{StaticResource MainPageButton}"
+                        Text="Fortsätt" />
+                </StackLayout>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="OnlineStep.Views.ChapterView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviours="clr-namespace:OnlineStep.Assets"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:OnlineStep.Assets;assembly=OnlineStep"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:OnlineStep.ViewModels;assembly=OnlineStep"
+    BackgroundColor="DimGray"
+    BackgroundImageSource="Background_Blue.png"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/Global.xaml" />
+        <ResourceDictionary>
+            <behaviours:ZeroToFalseConverter x:Key="ZeroToFalse" />
+            <behaviours:ZeroToTrueConverter x:Key="ZeroToTrue" />
+        </ResourceDictionary>
+        <ResourceDictionary Source="/Styles/Text.xaml" />
+    </ContentPage.Resources>
+    <ListView
+        x:Name="chapterLevels"
+        HasUnevenRows="True"
+        ItemsSource="{Binding ChapterLevels}"
+        SelectionMode="None"
+        SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Margin="0,8" HorizontalOptions="Center">
+
+                        <local:ItemsControl ItemsSource="{Binding Chapters}">
+
+                            <local:ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="12,0" RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="96" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <Frame
+                                            Padding="0"
+                                            CornerRadius="100"
+                                            HeightRequest="96"
+                                            HorizontalOptions="Center"
+                                            IsClippedToBounds="True"
+                                            WidthRequest="96">
+
+
+                                            <ImageButton
+                                                Grid.Row="0"
+                                                Aspect="AspectFill"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ChapterViewModel}}, Path=GoToPageView}"
+                                                CommandParameter="{Binding _id}"
+                                                HeightRequest="96"
+                                                HorizontalOptions="Center"
+                                                IsEnabled="False"
+                                                Source="{Binding Icon}"
+                                                WidthRequest="96" />
+                                        </Frame>
+                                        <BoxView
+                                            Grid.Row="0"
+                                            CornerRadius="100"
+                                            IsVisible="{Binding Locked}"
+                                            Opacity="0.9"
+                                            Color="#333" />
+
+                                        <Label
+                                            Grid.Row="1"
+                                            Padding="0,3,0,0"
+                                            CharacterSpacing="0.6"
+                                            FontAttributes="None"
+                                            HorizontalOptions="Center"
+                                            Opacity="1"
+                                            Style="{StaticResource TextBody}"
+                                            Text="{Binding Name}"
+                                            TextColor="Beige" />
+
+                                        <ProgressBar
+                                            Grid.Row="2"
+                                            HorizontalOptions="Center"
+                                            IsVisible="{Binding PagesResult, Converter={StaticResource ZeroToTrue}}"
+                                            Opacity="0.9"
+                                            Progress="{Binding PagesResult}"
+                                            ScaleY="2"
+                                            Style="{StaticResource ChapterViewProgressBar}" />
+
+
+                                        <Label
+                                            Grid.Row="2"
+                                            Padding="0,-2,0,0"
+                                            CharacterSpacing="0.6"
+                                            FontAttributes="None"
+                                            HorizontalOptions="Center"
+                                            IsVisible="{Binding PagesResult, Converter={StaticResource ZeroToFalse}}"
+                                            Opacity="0.85"
+                                            Style="{StaticResource TextBody}"
+                                            Text="0/6"
+                                            TextColor="Beige" />
+
+
+                                    </Grid>
+                                </DataTemplate>
+                            </local:ItemsControl.ItemTemplate>
+                        </local:ItemsControl>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
