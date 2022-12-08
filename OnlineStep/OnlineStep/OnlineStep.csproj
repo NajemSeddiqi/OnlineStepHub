@@ -23,7 +23,7 @@
     <PackageReference Include="LiveXAML" Version="2.1.73" />
     <PackageReference Include="modernhttpclient" Version="2.4.2" />
     <PackageReference Include="NEST" Version="7.6.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.6" />
     <PackageReference Include="refit" Version="5.0.23" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
